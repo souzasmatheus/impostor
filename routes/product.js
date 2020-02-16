@@ -11,10 +11,10 @@ router.get('/all', async (req, res) => {
     const products = await Product.find();
 
     products.sort(function(a, b) {
-      if (a.name < b.name) {
+      if (a.name.toLowerCase() < b.name.toLowerCase()) {
         return -1;
       }
-      if (a.name > b.name) {
+      if (a.name.toLowerCase() > b.name.toLowerCase()) {
         return 1;
       }
       return 0;
@@ -29,11 +29,21 @@ router.get('/all', async (req, res) => {
 });
 
 router.get('/search', async (req, res) => {
-  const { query } = req.body;
+  const { product } = req.query;
 
   try {
     const products = await Product.find({
-      $or: [{ name: query }, { keywords: query }]
+      $or: [{ name: product }, { keywords: product }]
+    });
+
+    products.sort(function(a, b) {
+      if (a.name.toLowerCase() < b.name.toLowerCase()) {
+        return -1;
+      }
+      if (a.name.toLowerCase() > b.name.toLowerCase()) {
+        return 1;
+      }
+      return 0;
     });
 
     if (products.length > 0) {
