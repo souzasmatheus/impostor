@@ -25,6 +25,7 @@ router.post('/login', async (req, res) => {
       });
 
       res
+        .header('Access-Control-Expose-Headers', 'auth-token')
         .header('auth-token', token)
         .status(200)
         .send({ message: 'You are now logged in' });

@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const app = express();
 
 require('dotenv').config();
@@ -18,6 +19,9 @@ mongoose
 // Body Parser Middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+// Cors middleware
+app.use(cors());
 
 app.get('/', (req, res) => {
   res.send('Working');
