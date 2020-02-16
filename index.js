@@ -23,6 +23,8 @@ app.get('/', (req, res) => {
   res.send('Working');
 });
 
+app.use('/api/admin', require('./routes/admin'));
+
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
