@@ -33,7 +33,10 @@ router.get('/search', async (req, res) => {
 
   try {
     const products = await Product.find({
-      $or: [{ name: product }, { keywords: product }]
+      $or: [
+        { name: { $regex: product, $options: 'i' } },
+        { keywords: { $regex: product, $options: 'i' } }
+      ]
     });
 
     products.sort(function(a, b) {
