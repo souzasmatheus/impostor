@@ -40,7 +40,7 @@ router.get('/count', (req, res) => {
   });
 });
 
-router.delete('./count', (req, res) => {
+router.delete('/count', (req, res) => {
   fs.writeFile('./count.json', JSON.stringify(0), err => {
     if (err) {
       res.end();
